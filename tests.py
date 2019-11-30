@@ -26,8 +26,9 @@ def get_instances():
             'RootDeviceName': [instance.root_device_name],
             'RootDeviceType': [instance.root_device_type],
         })
-
+    
         instance_holder = instance_holder.append(temp, ignore_index=True, sort=False)
+    print(instance_holder[['ID','State','Platform','PrivateIP']])
     return(instance_holder)
        # instance_holder.to_csv('./all_instances.csv', sep=',', index=False)
 
@@ -86,6 +87,7 @@ def delete_detached_drives():
             volume.delete(DryRun=False)
     print('Deleted all drives')
 
+get_instances()
 # subnet_id – The VPC Subnet ID, if running in VPC.
 # vpc_id – The VPC ID, if running in VPC.
 # private_ip_address – The private IP address of the instance.
