@@ -28,7 +28,7 @@ def get_instances():
         })
     
         instance_holder = instance_holder.append(temp, ignore_index=True, sort=False)
-    print(instance_holder[['ID','State','Platform','PrivateIP']])
+    print(instance_holder[['ID','State','Platform','PrivateIP','RootDeviceName']])
     return(instance_holder)
        # instance_holder.to_csv('./all_instances.csv', sep=',', index=False)
 
@@ -65,13 +65,11 @@ def start_stopped_instances():
         print('\n'.join(x for x in temp))
 
 
-def get_detached_drives():
+def get_drives():
+    drive_holder = pd.DataFrame()
     temp = resources.volumes.all()
-    volumes = list()
     for vol in temp:
-        volumes.append(vol.id)
-    print(volumes)
-    return volumes
+        print(vol)
 
 
 def delete_detached_drives():
@@ -87,7 +85,7 @@ def delete_detached_drives():
             volume.delete(DryRun=False)
     print('Deleted all drives')
 
-get_instances()
+get_drives()
 # subnet_id – The VPC Subnet ID, if running in VPC.
 # vpc_id – The VPC ID, if running in VPC.
 # private_ip_address – The private IP address of the instance.
